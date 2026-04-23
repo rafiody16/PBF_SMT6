@@ -4,52 +4,52 @@ import fetcher from "../../utils/swr/fetcher";
 import DetailProduk from "@/views/DetailProduk";
 import { ProductType } from "../../types/Product.type";
 
-// const HalamanProduk = ({product}:{ product: ProductType }) => {
-//     // {product}:{ product: ProductType }
-//     // const Router = useRouter();
-//     // console.log(Router);
-//     // const {query} = useRouter();
-//     // const {data, error, isLoading} = useSWR(`/api/produk/${query.id}`, fetcher);
-//     // return (
-//     //     <div>
-//     //         <DetailProduk products={isLoading ? [] : data.data}></DetailProduk>
-//     //     </div>
-//     // )
-
-//     //SSR && SSG
-//     return (
-//         <div>
-//             <DetailProduk products={product} />
-//         </div>
-//     )
-// }
-
-const HalamanProduk = () => {
+const HalamanProduk = ({product}:{ product: ProductType }) => {
+    // {product}:{ product: ProductType }
     // const Router = useRouter();
     // console.log(Router);
-    const {query} = useRouter();
+    // const {query} = useRouter();
+    // const {data, error, isLoading} = useSWR(`/api/produk/${query.id}`, fetcher);
+    // return (
+    //     <div>
+    //         <DetailProduk products={isLoading ? [] : data.data}></DetailProduk>
+    //     </div>
+    // )
+
+    //SSR && SSG
     return (
         <div>
-            <h1>Halaman Produk</h1>
-            <p>Produk: {query.id}</p>
+            <DetailProduk products={product} />
         </div>
     )
 }
+
+// const HalamanProduk = () => {
+//     // const Router = useRouter();
+//     // console.log(Router);
+//     const {query} = useRouter();
+//     return (
+//         <div>
+//             <h1>Halaman Produk</h1>
+//             <p>Produk: {query.id}</p>
+//         </div>
+//     )
+// }
 
 export default HalamanProduk;
 
 // export default HalamanProduk;
 
 // Untuk SSR
-// export async function getServerSideProps({ params }: { params: { id: string }}) {
-//     const res = await fetch(`http://localhost:3000/api/produk/${params?.id}`);
-//     const response = await res.json();
-//     return {
-//         props: {
-//             product: response.data,
-//         },
-//     }
-// }
+export async function getServerSideProps({ params }: { params: { id: string }}) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/produk/${params?.id}`);
+    const response = await res.json();
+    return {
+        props: {
+            product: response.data,
+        },
+    }
+}
 
 // Untuk SSG
 // export async function getStaticPaths() {
