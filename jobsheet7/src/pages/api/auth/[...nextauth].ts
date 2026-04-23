@@ -15,7 +15,7 @@ export const authOptions:NextAuthOptions = {
         CredentialsProvider({
             name: "credentials",
             credentials: {
-                // fullname: { label:"Full Name", type: "text" },
+                fullname: { label:"Full Name", type: "text" },
                 email: { label:"Email", type: "email" },
                 password: { label:"Password", type: "password" }
             },
